@@ -1,0 +1,77 @@
+{{ 'custom-also-like.css' | asset_url | stylesheet_tag }}
+
+<div class="also-like-wrapper">
+
+    <h2 class="also-like-heading">You May Also Like</h2>
+
+</div>
+
+
+
+
+
+
+{% schema %}
+    {
+        "name": "Custom Also Like",
+        "class": "section",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "enable_video_autoplay",
+                "label": "Enable Video Autoplay",
+                "default": false
+            },
+            {
+                "type": "select",
+                "id": "height",
+                "label": "Height",
+                "options": [
+                    {
+                        "value": "300px",
+                        "label": "300px"
+                    },
+                    {
+                        "value": "350px",
+                        "label": "350px"
+                    },
+                    {
+                        "value": "400px",
+                        "label": "400px"
+                    },
+                    {
+                        "value": "450px",
+                        "label": "450px"
+                    },
+                    {
+                        "value": "500px",
+                        "label": "500px"
+                    }
+                ],
+                "default": "450px"
+            },
+
+        ],
+
+        "blocks": [
+            {
+                "type": "slide",
+                "name": "Video Slide",
+                "settings": [
+                    {
+                        "type": "video",
+                        "id": "video",
+                        "label": "Video"
+                    }
+
+                ]
+            }
+        ],
+
+        "presets": [
+            {
+            "name": " Custom Also Like "
+            }
+        ]
+    }
+{% endschema %}

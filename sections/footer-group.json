@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "custom_newsletter_yfEi47": {
+      "type": "custom-newsletter",
+      "name": "Custom NewsLetter",
+      "settings": {
+        "subtitle": "Be the first to hear about new products, exclusive events, and online offers.",
+        "heading": "Subscribe up and get 10% off your first order",
+        "placeholder": "Enter your email",
+        "button_text": "Subscribe"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "image_V3FyNA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Feb_6_2026_11_34_50_AM.png",
+            "image_width": 150,
+            "alignment": ""
+          }
+        },
+        "link_list_NCWHMJ": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "fashion"
+          }
+        },
+        "link_list_tdJHDA": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Help",
+            "menu": "help"
+          }
+        },
+        "link_list_TefVrB": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Trust & Assurance",
+            "menu": "trust-assurance"
+          }
+        },
+        "brand_information_b3tADM": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        }
+      },
+      "block_order": [
+        "image_V3FyNA",
+        "link_list_NCWHMJ",
+        "link_list_tdJHDA",
+        "link_list_TefVrB",
+        "brand_information_b3tADM"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "custom_newsletter_yfEi47",
+    "footer"
+  ]
+}

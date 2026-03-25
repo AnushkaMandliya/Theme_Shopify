@@ -1,0 +1,151 @@
+.custom-recently-viewed-wrapper {
+  padding: 30px 10px;
+  background:rgba(247, 242, 234, 0.82);
+  margin-top: 0px;
+}
+
+.recently-viewed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 30px;
+  margin-bottom: 20px;
+}
+
+.recently-view-heading {
+  width: 100%;
+  font-size: 28px !important;
+  font-weight: 550;
+  margin-bottom: 30px !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recently-view-heading::after {
+    content: "";
+    flex: 1;
+    height: 1.8px;
+    background: #00000026;
+}
+
+.recently-viewed-swiper{
+  margin: 0 50px;
+  overflow-x: auto;
+}
+
+.recently-viewed-swiper {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;   
+}
+
+.recently-viewed-swiper::-webkit-scrollbar {
+  display: none;  
+}
+
+.recently-viewed-swiper .swiper-wrapper{
+  gap: 30px;
+}
+
+.recently-viewed-swiper .swiper-slide {
+  width: 320px;
+  text-align: center;
+}
+
+.recently-viewed-swiper img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  aspect-ratio: 3/4;
+}
+
+.recently-viewed-swiper a{
+  text-decoration: none;
+}
+
+.recently-viewed-swiper h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 5px 0 4px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+}
+
+.recently-viewed-swiper h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1.6px;
+  background: #54267e;
+  transition: all 0.4s ease;
+}
+
+.recently-viewed-swiper h3:hover::after {
+  width: 100%;
+}
+
+.recently-viewed-swiper h3:hover{
+  color: #54267e;
+}
+
+.recently-viewed-swiper p {
+  font-size: 15px;
+  margin-top: 7px;
+  font-weight: 600;
+  text-align: center;
+  color: black;
+  opacity: 0.7;
+}
+
+
+@media (max-width: 767px) {
+
+  .custom-recently-viewed-wrapper  {
+    padding: 15px 10px;
+    margin-top: 50px;
+  }
+
+  .recently-viewed-header {
+    padding: 0px 12px;
+    margin-bottom: 10px;
+  }
+
+  .recently-viewed-swiper .swiper-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px 12px !important;
+    
+  }
+
+  .recently-viewed-swiper .swiper-slide {
+    width: 100%;
+    margin-right: 10px;
+  }
+
+  /* right side extra gap avoid */
+  .recently-viewed-swiper .swiper-slide:nth-child(2n) {
+    margin-right: 0;
+  }
+
+
+  .recently-view-heading {
+    font-size: 27px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .recently-viewed-swiper{
+    margin: 0 20px;
+  }
+
+  .recently-viewed-swiper h3 {
+    font-size: 17px;
+  }
+  .recently-viewed-swiper p {
+    font-size: 18px;
+  }
+
+}

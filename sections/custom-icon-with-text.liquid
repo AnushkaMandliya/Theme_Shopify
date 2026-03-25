@@ -1,0 +1,74 @@
+{{ 'custom-icon-with-text.css' | asset_url | stylesheet_tag }}
+
+<section class="icon-text-multiple">
+  <div class="icon-text-wrapper">
+    {% for block in section.blocks %}
+      <div class="icon-text-item">
+        
+        <span class="icon">
+          {% case block.settings.icon %}
+            {% when 'shipping' %} {{ 'shipping-icon.svg' | inline_asset_content }}
+            {% when 'refund' %}  {{ 'refund-icon.svg' | inline_asset_content }}
+            {% when 'payment' %} {{ 'checkout-icon.svg' | inline_asset_content }}
+            {% when 'quality' %} {{ 'quality-icon.svg' | inline_asset_content }}
+          {% endcase %}
+        </span>
+
+        <h3 class="icon_name">{{ block.settings.text }}</h3>
+        <p class="icon_description"> {{ block.settings.para }} </p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+
+{% schema %}
+    {
+    "name": "Custom Icon With Text",
+    "class": "section",
+
+    "settings": [
+    ],
+
+    "blocks": [
+        {
+        "type": "icon_text",
+        "name": "Icon + Text",
+        "settings": [
+            {
+              "type": "select",
+              "id": "icon",
+              "label": "Icon",
+              "options": [
+                { "value": "shipping", "label": "Free Shipping" },
+                { "value": "refund", "label": "Easy Returns" },
+                { "value": "payment", "label": "Secure Payment" },
+                { "value": "quality", "label": "Premium Quality" }
+              ],
+              "default": "shipping"
+            },
+
+            {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "Free Shipping"
+            },
+            {
+                "type": "text",
+                "id": "para",
+                "label": "Text",
+                "default": "Icon with text paragraph"
+            }
+        ]
+        }
+    ],
+
+    "presets": [
+        {
+        "name": "Custom Icon With Text"
+        }
+    ]
+    }
+{% endschema %}

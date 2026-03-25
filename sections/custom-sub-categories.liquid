@@ -1,0 +1,80 @@
+{{ 'custom-sub-category.css' | asset_url | stylesheet_tag }}
+
+<section class="custom-sub-category">
+
+  <div class="sub-category-wrapper page-width">
+    
+    {% for block in section.blocks %}
+      <div class="sub-category-card">
+        
+        {% if block.settings.image != blank %}
+          <img 
+            src="{{ block.settings.image | image_url: width: 600 }}" 
+            alt="{{ block.settings.heading }}"
+            width={{ block.settings.image.width }}
+            height={{ block.settings.image.height }}
+          >
+        {% endif %}
+
+        <div class="sub-category-content">
+          <h3>{{ block.settings.heading }}</h3>
+          <p>{{ block.settings.text }}</p>
+
+          {% if block.settings.button_label != blank %}
+            <a href="{{ block.settings.button_link }}" class="sub-category-btn">
+              {{ block.settings.button_label }}
+            </a>
+          {% endif %}
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Sub Category",
+  "class": "section",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "sub_category",
+      "name": "Sub Category Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Handmade Pottery"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Sub Category",
+      "blocks": [
+        { "type": "sub_category" },
+        { "type": "sub_category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

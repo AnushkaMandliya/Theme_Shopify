@@ -1,0 +1,54 @@
+{{ 'custom-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+<div class="announcement-bar-wrapper">
+  <div class="announcement-track">
+    {% for i in (1..2) %}
+      {% for block in section.blocks %}
+        <div class="announcement-bar-part" {{ block.shopify_attributes }}>
+          <h2>{{ block.settings.announcement_text }}</h2>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const track = document.querySelector(".announcement-track");
+    const parts = document.querySelectorAll(".announcement-bar-part");
+
+    if (!track || parts.length < 4) return;
+
+    track.classList.add("scrolling");
+    });
+</script>
+
+
+{% schema %}
+    {
+        "name": "Announcement Bar",
+        "settings": [],
+        "blocks": [
+            {
+                "type": "announcement",
+                "name": "Announcement Text",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "announcement_text",
+                        "label": "Announcement Text",
+                        "default": "Announcement Bar"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+            "name": "Announcement Bar"
+            }
+        ]
+    }
+{% endschema %}

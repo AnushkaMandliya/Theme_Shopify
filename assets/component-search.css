@@ -1,0 +1,134 @@
+.search__input.field__input {
+  padding-right: 9.8rem;
+  
+}
+
+.search__button {
+  right: var(--inputs-border-width);
+  top: var(--inputs-border-width);
+}
+
+.reset__button {
+  right: calc(var(--inputs-border-width) + 4.4rem);
+  top: var(--inputs-border-width);
+}
+
+.reset__button:not(:focus-visible)::after {
+  border-right: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  display: block;
+  height: calc(100% - 1.6rem);
+  content: '';
+  position: absolute;
+  right: 0;
+}
+
+.reset__button:not(:focus)::after {
+  border-right: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  display: block;
+  height: calc(100% - 1.8rem);
+  content: '';
+  position: absolute;
+  right: 0;
+}
+
+.search__button:focus-visible,
+.reset__button:focus-visible {
+  background-color: rgb(var(--color-background));
+  z-index: 4;
+}
+
+.search__button:focus,
+.reset__button:focus {
+  background-color: rgb(var(--color-background));
+  z-index: 4;
+}
+
+.search__button:not(:focus-visible):not(.focused),
+.reset__button:not(:focus-visible):not(.focused) {
+  box-shadow: inherit;
+  background-color: inherit;
+}
+
+.search__button:hover .icon,
+.reset__button:hover .icon {
+  transform: scale(1.07);
+}
+
+.search__button .icon {
+  height: 1.8rem;
+  width: 1.8rem;
+}
+
+.reset__button .icon.icon-close {
+  height: 3rem;
+  width: 3rem;
+  stroke-width: 0.1rem;
+}
+
+/* Remove extra spacing for search inputs in Safari */
+input::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.template-search__results {
+  position: relative;
+}
+
+/* Hover pe bhi kuch add na ho */
+.search-modal .search__input:hover {
+  box-shadow: none !important;
+}
+
+/* Autofill background remove (Chrome fix) */
+.search-modal input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* PURE underline search – no box at all */
+.search-modal .field {
+  border: none !important;
+  box-shadow: none !important;
+  position: relative;
+}
+
+/* REMOVE shopify default box */
+.search-modal .field::before,
+.search-modal .field::after {
+  display: none !important;
+}
+
+/* INPUT clean */
+.search-modal .field__input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.25) !important;
+  border-radius: 0 !important;
+  padding-left: 0;
+}
+
+/* Focus underline only */
+.search-modal .field__input:focus,
+.search-modal .field__input:focus-visible {
+  border-bottom-color: #6A2E9E;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Buttons ko bhi clean rakho */
+.search-modal .search__button,
+.search-modal .reset__button {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.search__input {
+  text-transform: capitalize;
+}
+
+.icon-close circle{
+  display: none;
+}
+

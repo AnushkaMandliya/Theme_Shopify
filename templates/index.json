@@ -1,0 +1,423 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_image_banner_U8UCtp": {
+      "type": "custom-image-banner",
+      "blocks": {
+        "slide_YTY9Wa": {
+          "type": "slide",
+          "settings": {
+            "heading": "Printed Styles",
+            "sub_heading": "Printed Perfection: Designs That Make a Statement",
+            "button_text": "Shop Now",
+            "button_link": "shopify://collections/printed-styles",
+            "banner_image": "shopify://shop_images/Crafted_in_the_purest_mulmul_this_Anarkali_is_not_just_worn_it_is_felt_like_a_soft_hush_of_royalty_brushing_against_your_skin____Product_-_Mulmul_Printed_Anarkali_Suit_Set___Now_Live.jpg"
+          }
+        },
+        "slide_AWXFHH": {
+          "type": "slide",
+          "settings": {
+            "heading": "Kurta Sets",
+            "sub_heading": "Timeless Straight-Cut Sets, Modern Classics: A-Line Wonders.",
+            "button_text": "Shop Now",
+            "button_link": "shopify://collections/kurta-sets",
+            "banner_image": "shopify://shop_images/Price-875_shipping_Cotton_flex_embroidered_kurta_Palazzo_sets___formal_wear_kurta___women_wear_Suit.jpg"
+          }
+        },
+        "slide_qjhQje": {
+          "type": "slide",
+          "settings": {
+            "heading": "Festive Edit",
+            "sub_heading": " Elevate Your Festive Wardrobe",
+            "button_text": "Shop Now",
+            "button_link": "shopify://collections/festive-edit",
+            "banner_image": "shopify://shop_images/KF_KRITVA_FASHION_GOWN-WITH-DUPATTA_Discover_the_elegance_of_traditional_attire_with_our_Designer_Festive_Wear_Gown_featuring_Attractive_Sequins_Embroidery_Work__GOWN__-_FABRICS_WORK.jpg"
+          }
+        },
+        "slide_48Mbz6": {
+          "type": "slide",
+          "settings": {
+            "heading": "Co- ord Sets",
+            "sub_heading": "Fashion fades, style is eternal",
+            "button_text": "Shop Now",
+            "button_link": "shopify://collections/co-ord-sets",
+            "banner_image": "shopify://shop_images/Co-ord_Set.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "slide_YTY9Wa",
+        "slide_AWXFHH",
+        "slide_qjhQje",
+        "slide_48Mbz6"
+      ],
+      "name": "Custom Image Banner",
+      "settings": {
+        "Autoplay_enable": true,
+        "autoplay_range": 3500,
+        "desktop_text_position": "center",
+        "desktop_height": "600px",
+        "mobile_text_position": "center",
+        "mobile_height": "350px"
+      }
+    },
+    "custom_category_nNtFNG": {
+      "type": "custom-category",
+      "blocks": {
+        "category_DAgrqa": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_182703.png",
+            "category_title": "Floral Digital Print Kurta Set",
+            "category_link": "shopify://collections/digital-prints"
+          }
+        },
+        "category_yGetrX": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_174505.png",
+            "category_title": "Kurta & Plazo Set",
+            "category_link": "shopify://collections/kurta-plazo-kurta-sets"
+          }
+        },
+        "category_KDpUYh": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_175214_50099000-049f-4741-b36a-660ffa654ecf.png",
+            "category_title": "Kurta + Pant Sets",
+            "category_link": "shopify://collections/kurta-pant-kurta-sets"
+          }
+        },
+        "category_4WmW4t": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_180221.png",
+            "category_title": "Kurta + Dupatta Festive Set",
+            "category_link": "shopify://collections/kurta-dupatta-kurta-sets"
+          }
+        },
+        "category_dfFyHA": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_181412.png",
+            "category_title": "Trending Anarkali set",
+            "category_link": "shopify://collections/ethnic-wear"
+          }
+        },
+        "category_B9nHB3": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_181738.png",
+            "category_title": "Evening Festive Kurta Set",
+            "category_link": "shopify://collections/festive-comobos"
+          }
+        },
+        "category_f4jWbQ": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_182125.png",
+            "category_title": "Straight Fit Co-ord Sets",
+            "category_link": "shopify://collections/rangrez-traditional-prints"
+          }
+        },
+        "category_pFxxYR": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_182316.png",
+            "category_title": "Silk Co-ord Sets",
+            "category_link": "shopify://collections/by-style"
+          }
+        },
+        "category_ajdqqq": {
+          "type": "category",
+          "settings": {
+            "category_image": "shopify://shop_images/Screenshot_2026-02-06_182542.png",
+            "category_title": "Bandhnai Print Kurta Set",
+            "category_link": "shopify://collections/occassion-wear"
+          }
+        }
+      },
+      "block_order": [
+        "category_DAgrqa",
+        "category_yGetrX",
+        "category_KDpUYh",
+        "category_4WmW4t",
+        "category_dfFyHA",
+        "category_B9nHB3",
+        "category_f4jWbQ",
+        "category_pFxxYR",
+        "category_ajdqqq"
+      ],
+      "name": "Custom Category Part",
+      "settings": {}
+    },
+    "custom_sale_banner_FKyVfT": {
+      "type": "custom-sale-banner",
+      "name": "Custom Sale Banner",
+      "settings": {
+        "left_image": "shopify://shop_images/ChatGPT_Image_Feb_6_2026_04_55_59_PM.png",
+        "right_image": "shopify://shop_images/ChatGPT_Image_Feb_6_2026_05_06_50_PM.png",
+        "badge_text": "FASHION",
+        "title": "FLASH SALE",
+        "description": "Hurry! Enjoy massive discounts on fashion essentials — limited stock, limited time. Don’t miss out!",
+        "subtitle": "UP TO 70% OFF",
+        "button_text": "Shop Now",
+        "button_link": "shopify://collections"
+      }
+    },
+    "custom_best_sellers_Jiahwm": {
+      "type": "custom-best-sellers",
+      "name": "Custom Best Sellers",
+      "settings": {
+        "heading": "Best Sellers",
+        "collection": "best-sellers"
+      }
+    },
+    "custom_sub_categories_tBzeyJ": {
+      "type": "custom-sub-categories",
+      "blocks": {
+        "sub_category_nBEYch": {
+          "type": "sub_category",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-02-06_180221.png",
+            "heading": "Party Wear",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/best-sellers"
+          }
+        },
+        "sub_category_EYWFNG": {
+          "type": "sub_category",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-02-06_182542.png",
+            "heading": "Wedding Store",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/festive-comobos"
+          }
+        },
+        "sub_category_QC8kRT": {
+          "type": "sub_category",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2026-02-06_175214.png",
+            "heading": "Daily Wear",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/kurta-plazo-kurta-sets"
+          }
+        }
+      },
+      "block_order": [
+        "sub_category_nBEYch",
+        "sub_category_EYWFNG",
+        "sub_category_QC8kRT"
+      ],
+      "name": "Custom Sub Category",
+      "settings": {}
+    },
+    "custom_trending_product_p3GLCm": {
+      "type": "custom-trending-product",
+      "name": "Custom Trending Product",
+      "settings": {
+        "trending_collection": "trending-product",
+        "products_limit": 5
+      }
+    },
+    "custom_video_M68tTG": {
+      "type": "custom-video",
+      "blocks": {
+        "slide_QNgQMk": {
+          "type": "slide",
+          "settings": {
+            "product_video": "shopify://files/videos/9cfae28f4fdeb9ab0702fedc257d2f5e_720w.mp4"
+          }
+        },
+        "slide_kACkNX": {
+          "type": "slide",
+          "settings": {
+            "product_video": "shopify://files/videos/0fd9b9ee21332e6672f6b923044dd730.mp4"
+          }
+        },
+        "slide_APmrcn": {
+          "type": "slide",
+          "settings": {
+            "product_video": "shopify://files/videos/c32c6c35e4c672467544852cfb4ac290_720w.mp4"
+          }
+        },
+        "slide_ARf4tz": {
+          "type": "slide",
+          "settings": {
+            "product_video": "shopify://files/videos/7627f6ec4d544ac66f4a365055a980fd_720w.mp4"
+          }
+        },
+        "slide_99q4nH": {
+          "type": "slide",
+          "settings": {
+            "product_video": "shopify://files/videos/0be7a4d0f8625dd60a4faff860427a50.mp4"
+          }
+        },
+        "slide_qBnc47": {
+          "type": "slide",
+          "settings": {
+            "product_video": "shopify://files/videos/f6a50fed47013a7cf508a4cfafe04e84.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "slide_QNgQMk",
+        "slide_kACkNX",
+        "slide_APmrcn",
+        "slide_ARf4tz",
+        "slide_99q4nH",
+        "slide_qBnc47"
+      ],
+      "name": "Custom Video Section",
+      "settings": {}
+    },
+    "custom_image_with_text_G7gBwD": {
+      "type": "custom-image-with-text",
+      "name": "Custom-Image-Text",
+      "settings": {
+        "mainImage": "shopify://shop_images/Screenshot_2026-02-07_123447.png",
+        "sub-heading": "Modern Fusion",
+        "heading": "Shop Designer Kurta Sets Online",
+        "text": "Luxurious materials such as organza, chanderi silk, and breathable cotton ensure both comfort and elegance.",
+        "main_image_width": "large",
+        "Sub_Heading_Font_Size": 16,
+        "Heading_Font_Size": 45,
+        "Paragraph_Font_Size": 16,
+        "Text_Align": "left",
+        "Button_text": "View Collection",
+        "Button_Align": "left",
+        "button_link": "shopify://collections",
+        "image_right": false
+      }
+    },
+    "custom_testimonial_KkkBGh": {
+      "type": "Custom-testimonial",
+      "blocks": {
+        "testimonial_GqyYAU": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/My_Baby_Gurl_in_Indian_Attire.jpg",
+            "name": "Sample Name",
+            "designation": "Designation",
+            "rating": 5,
+            "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+        },
+        "testimonial_tmEJPW": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/2a9777400e2487cb0a20c34777bb1337.jpg",
+            "name": "Sample Name",
+            "designation": "Designation",
+            "rating": 5,
+            "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+        },
+        "testimonial_T4iVfB": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/download_c865285a-8db2-48c1-b439-2a113052e00c.jpg",
+            "name": "Sample Name",
+            "designation": "Designation",
+            "rating": 5,
+            "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+        },
+        "testimonial_bLdbNX": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/image4.avif",
+            "name": "Heyyyy",
+            "designation": "Designation",
+            "rating": 3,
+            "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+        },
+        "testimonial_mbDPyr": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/first.jpg",
+            "name": "Sample Name",
+            "designation": "Designation",
+            "rating": 5,
+            "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_GqyYAU",
+        "testimonial_tmEJPW",
+        "testimonial_T4iVfB",
+        "testimonial_bLdbNX",
+        "testimonial_mbDPyr"
+      ],
+      "name": "Custom Testimonial",
+      "settings": {}
+    },
+    "custom_icon_with_text_FhRhwi": {
+      "type": "custom-icon-with-text",
+      "blocks": {
+        "icon_text_xLncJL": {
+          "type": "icon_text",
+          "settings": {
+            "icon": "shipping",
+            "text": "Free Shipping",
+            "para": "On all orders over $50. Shop now and save!"
+          }
+        },
+        "icon_text_U7aFiG": {
+          "type": "icon_text",
+          "settings": {
+            "icon": "quality",
+            "text": "Premium Quality",
+            "para": "Crafted with exceptional materials and attention to detail"
+          }
+        },
+        "icon_text_FNniyC": {
+          "type": "icon_text",
+          "settings": {
+            "icon": "refund",
+            "text": "7 Days return",
+            "para": "Money back guarantee"
+          }
+        },
+        "icon_text_YdwPh8": {
+          "type": "icon_text",
+          "settings": {
+            "icon": "payment",
+            "text": "Secure Checkout",
+            "para": "100% secure checkout process"
+          }
+        }
+      },
+      "block_order": [
+        "icon_text_xLncJL",
+        "icon_text_U7aFiG",
+        "icon_text_FNniyC",
+        "icon_text_YdwPh8"
+      ],
+      "name": "Custom Icon With Text",
+      "settings": {}
+    }
+  },
+  "order": [
+    "custom_image_banner_U8UCtp",
+    "custom_category_nNtFNG",
+    "custom_sale_banner_FKyVfT",
+    "custom_best_sellers_Jiahwm",
+    "custom_sub_categories_tBzeyJ",
+    "custom_trending_product_p3GLCm",
+    "custom_video_M68tTG",
+    "custom_image_with_text_G7gBwD",
+    "custom_testimonial_KkkBGh",
+    "custom_icon_with_text_FhRhwi"
+  ]
+}

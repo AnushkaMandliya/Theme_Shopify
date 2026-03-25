@@ -1,0 +1,90 @@
+.icon-text-multiple {
+  padding: 30px 20px;
+  margin-top: 50px;
+}
+
+.icon-text-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-text-item {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 20%;
+  gap: 2px;
+}
+
+
+.icon_name{
+    margin-bottom: 3px;
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 15px;
+    opacity: 0.8;
+}
+
+.icon-text-item .icon {
+  width: 40px;
+  height: 40px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.icon-text-item .icon_description {
+  font-weight: 500;
+  margin-top: 4px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+
+  .icon-text-multiple {
+    padding: 25px 20px 40px 20px;
+    margin-top: 20px;
+  }
+
+  .icon-text-wrapper {
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 25px 12px;
+    padding: 0;
+
+  }
+
+  .icon-text-item {
+    width: 100%;
+    gap: 6px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  .icon-text-item .icon svg{
+    font-size: 30px;
+    width: 33px;
+    height: 33px;
+
+  }
+
+  .icon-text-item p {
+    display: none;
+  }
+
+  .icon_name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 1.3;
+  }
+
+}

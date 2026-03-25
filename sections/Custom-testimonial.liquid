@@ -1,0 +1,155 @@
+{{ 'Custom-testimonial.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-testimonial-wrapper">
+
+  <h2 class="testimonial-heading">Customer Reviews</h2>
+
+  <!-- Swiper -->
+  <div class="swiper testimonial-swiper">
+
+    <div class="swiper-wrapper">
+
+      {% for block in section.blocks %}
+      <div class="swiper-slide">
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+
+          <!-- Profile Image -->
+          <div class="testimonial-img">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 150 }}"
+                alt="{{ block.settings.name }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+              >
+            {% endif %}
+          </div>
+
+          <!-- Content -->
+          <div class="testimonial-content">
+            <div class="stars">
+              {% for i in (1..5) %}
+                {% if i <= block.settings.rating %}
+                  ★
+                {% else %}
+                  ☆
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <p>{{ block.settings.review }}</p>
+          </div>
+
+          <!-- Name -->
+          <div class="testimonial-name">
+            <h4>{{ block.settings.name }}</h4>
+            <span>{{ block.settings.designation }}</span>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+    <div class="swiper-button-prev testimonial-prev"></div>
+    <div class="swiper-button-next testimonial-next"></div>
+
+  </div>
+
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('.testimonial-swiper', {
+      loop: true,
+      spaceBetween: 20,
+      grabCursor: true,
+      speed: 1000, 
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+       breakpoints: {
+
+          0: {
+              slidesPerView: 1.5,
+              spaceBetween: 20,
+          },
+
+          768: {
+              slidesPerView: 3,
+          },
+
+          1024: {
+              slidesPerView: 4,
+              spaceBetween: 80,
+          },
+      },
+      navigation: {
+        nextEl: '.testimonial-next',
+        prevEl: '.testimonial-prev',
+      },
+    });
+  });
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Custom Testimonial",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Profile Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Sample Name"
+        },
+        {
+          "type": "text",
+          "id": "designation",
+          "label": "Designation",
+          "default": "Designation"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review",
+          "label": "Review Text",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Testimonial",
+      "blocks": [
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

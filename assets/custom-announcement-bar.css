@@ -1,0 +1,41 @@
+.announcement-bar-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background:rgb(58, 16, 97);
+    color: #FFFFFF;
+    padding: 2px;
+}
+
+.announcement-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    width: max-content;
+}
+
+.announcement-track.scrolling {
+    animation: marquee 22s linear infinite;
+}
+
+.announcement-bar-wrapper:hover .announcement-track.scrolling {
+    animation-play-state: paused;
+}
+
+.announcement-bar-part h2 {
+    font-size: 12px;
+    font-weight: 550;
+    color: #E8D9C4;
+    white-space: nowrap;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(10%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}

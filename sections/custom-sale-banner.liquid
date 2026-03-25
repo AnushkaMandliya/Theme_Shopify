@@ -1,0 +1,110 @@
+{{ 'custom-sale-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="main-wrapper">
+  <section class="sale-banner-wrapper">
+  <div class="sale-banner page-width">
+
+    {% if section.settings.left_image != blank %}
+      <div class="sale-img left-img">
+        <img src="{{ section.settings.left_image | image_url: width: 600 }}" 
+            alt=""
+            width={{ section.settings.left_image.width }} 
+            height={{ section.settings.left_image.height }}
+        >
+      </div>
+    {% endif %}
+
+    <div class="sale-content">
+      {% if section.settings.badge_text != blank %}
+        <span class="sale-badge">{{ section.settings.badge_text }}</span>
+      {% endif %}
+
+      <h2 class="sale-title">{{ section.settings.title }}</h2>
+
+      {% if section.settings.subtitle != blank %}
+        <p class="sale-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="sale-description">{{ section.settings.description }}</p>
+      {% endif %}
+
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link }}" class="sale-btn">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.right_image != blank %}
+      <div class="sale-img right-img">
+        <img src="{{ section.settings.right_image | image_url: width: 600 }}" 
+            alt=""
+            width={{ section.settings.right_image.width }} 
+            height={{ section.settings.right_image.height }}
+
+        >
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Sale Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right Image"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Top Text",
+      "default": "FASHION"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Main Title",
+      "default": "FLASH SALE"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Description...."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "UP TO 70% OFF"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Sale Banner"
+    }
+  ]
+}
+{% endschema %}

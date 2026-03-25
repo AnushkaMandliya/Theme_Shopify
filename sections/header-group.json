@@ -1,0 +1,118 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "custom_announcement_bar_REe4KH": {
+      "type": "custom-announcement-bar",
+      "blocks": {
+        "announcement_mT7DKF": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "Sustainable Fashion, Timeless Style"
+          }
+        },
+        "announcement_aVmB7x": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "Earn Rewards on Every Purchase"
+          }
+        },
+        "announcement_QAxFAk": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "Loved by 50,000+ Fashion Lovers"
+          }
+        },
+        "announcement_7rEet6": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "We ship world wide - Fast and reliable shipping!"
+          }
+        },
+        "announcement_VF3V3c": {
+          "type": "announcement",
+          "settings": {
+            "announcement_text": "+1(234) 567-8901"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_mT7DKF",
+        "announcement_aVmB7x",
+        "announcement_QAxFAk",
+        "announcement_7rEet6",
+        "announcement_VF3V3c"
+      ],
+      "name": "Announcement-Bar",
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_image_CQpzA3": {
+          "type": "mega_image",
+          "settings": {
+            "menu_handle": "printed-styles",
+            "image": "shopify://shop_images/2pcs_Set_Button_Collar_Floral_Print_Blouse_And_Pants_Casual_Women_Outfit.jpg"
+          }
+        },
+        "mega_image_ymdhWq": {
+          "type": "mega_image",
+          "settings": {
+            "menu_handle": "kurta-sets",
+            "image": "shopify://shop_images/Frick_design.jpg"
+          }
+        },
+        "mega_image_CT9mxg": {
+          "type": "mega_image",
+          "settings": {
+            "menu_handle": "festive-edit",
+            "image": "shopify://shop_images/Elegant_Purple_Embroidered_Flared_Kurta_Set_for_Festive_Wedding_Season_1499.jpg"
+          }
+        },
+        "mega_image_8BjWQc": {
+          "type": "mega_image",
+          "settings": {
+            "menu_handle": "co-ord-sets",
+            "image": "shopify://shop_images/Stylish_Trendy_Coord_Set.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "mega_image_CQpzA3",
+        "mega_image_ymdhWq",
+        "mega_image_CT9mxg",
+        "mega_image_8BjWQc"
+      ],
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "fashion",
+        "menu_type_desktop": "mega",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "custom_announcement_bar_REe4KH",
+    "header"
+  ]
+}

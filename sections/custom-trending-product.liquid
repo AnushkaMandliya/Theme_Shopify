@@ -1,0 +1,598 @@
+{{ 'custom-trending-product.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-trending-wrapper page-width">
+
+  <h2 class="trending-heading">Trending Products</h2>
+
+    {% if section.settings.trending_collection != blank %}
+
+        <div class="product-show-wrapper">
+
+            {% comment %} Left thumbnail {% endcomment %}
+
+            <div class="left-thumbnails">
+
+                {% for product in section.settings.trending_collection.products limit: section.settings.products_limit %}
+
+                    {% include 'propero-decimal', product: product %}
+
+                    <img
+                        src="{{ product.featured_image | image_url: width: 200 }}"
+                        alt="{{ product.title }}"
+                        class="thumbnail {% if forloop.first %}active{% endif %}"
+                        data-product-id="{{ product.id }}"
+                        data-title="{{ product.title }}"
+                        data-image="{{ product.featured_image | image_url: width: 600 }}"
+                        data-price="{{ product.price | money }}"
+                        data-is-decimal="{{ decimal }}"
+                        width={{ product.featured_image.width }}
+                        height={{ product.featured_image.height }}
+                    >
+
+                {% endfor %}
+            </div>
+
+            {% comment %} middle Main Image {% endcomment %}
+            <div class="middle-image">
+                {% assign first_product = section.settings.trending_collection.products.first %}
+                <img
+                    id="mainProductImage"
+                    src="{{ first_product.featured_image | image_url: width: 800 }}"
+                    alt="{{ first_product.title }}"
+                    width={{ first_product.featured_image.width }}
+                    height={{ first_product.featured_image.height }}
+                >
+            </div>
+
+            {% comment %} product details {% endcomment %}
+
+            <div class="right-content" id="rightContent">
+
+                {% assign product = section.settings.trending_collection.products.first %}
+
+                {% include 'propero-decimal', product: product %}
+
+                {% comment %} product heading {% endcomment %}
+                {% if product.title != blank %}
+                  <h2 id="productTitle">{{ product.title }}</h2>
+                {% endif %}
+
+                {% comment %} product price {% endcomment %}
+                <div id="decimalPrice" {% unless decimal %}style="display:none"{% endunless %}>
+                    {% render 'price', product: product, use_variant: true %}
+                </div>
+
+                    {%- comment -%} Normal price (JS controlled) {%- endcomment -%}
+                <div
+                    id="normalPrice"
+                    {% if decimal %}style="display:none"{% endif %}
+                >
+                    {{ product.price | money }}
+                </div> 
+
+                {% comment %} product ratings {% endcomment %}
+                {%  if product.metafields.custom.rating != blank %}
+                    <div class="rating" id="productRating"
+                        data-rating="{{ product.metafields.custom.rating | default: 0 }}">
+                    </div>
+                {% endif %} 
+
+                {% comment %} productDescription {% endcomment %}
+                {% if product.description != blank %}
+                    <p id="productDescription">
+                        {{ product.description | strip_html | truncate: 150 }}
+                    </p>
+                {% endif %}    
+
+                <!-- VARIANTS -->
+                <form method="post" action="/cart/add" id="addToCartForm">
+
+                    <input type="hidden" name="id" id="variantId" value="{{ product.selected_or_first_available_variant.id }}">
+                    <input type="hidden"
+                        id="fabricInfoInput"
+                        name="properties[Fabric Info]"
+                        value="{{ minimum_qty }} {{ settings.pr_unit }}"
+                    >
+
+                        <!-- QUANTITY -->
+
+                    <div class="quantity-box" {% comment %} {% if decimal %}style="display:none;"{% endif %} {% endcomment %}>
+                            <button type="button" class="qty-btn" data-action="minus">-</button>
+                            <input type="number" name="quantity" value="1" min="1" id="quantityInput" class="{% if decimal %}js-qty__num_custom{% endif %}">
+                            <button type="button" class="qty-btn" data-action="plus">+</button>
+                    </div>
+
+                    {% comment %} Custom decimal quantity showing in UI {% endcomment %}
+
+                    {% if decimal %}
+                      {% comment %} <label class="qtymetersla">Quantity in {{ pri_unit }}</label> {% endcomment %}
+
+                      <div class="qty_mains">
+
+                        <div class="decimal_qty">
+
+                            <span class=" sub" id="sub">
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path>
+                              </svg>
+                            </span> 
+
+                            <input
+                              type="number"
+                              id="decimal"
+                              name="quantity"
+                              value="{{ minimum_qty }}"
+                              min="{{ minimum_qty | times: step }}"
+                              limit="2"
+                              step="{{ step }}"
+                              inputmode="decimal"
+                              class="decimal newInput decimal__input"
+                              data-quantity-input1
+                            >
+                            
+
+                            <span class=" add" id="add">
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-plus" viewBox="0 0 20 20">
+                                <path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z">
+                                  
+                                </path>
+                            </svg>
+                            </span>
+
+                        </div>
+                      </div>
+                    {% endif %}
+
+                    <div id="variant-wrapper"></div>
+
+                        <!-- ADD TO CART -->
+                    <button 
+                            id="addToCartBtn"
+                            class="add-to-cart-btn"
+                            type="button"
+                    >
+                            Add to Cart
+                    </button>
+                    <div id="toast" class="toast"></div>
+
+                </form>
+
+               <!-- CHARACTERISTICS -->
+                {% if product.metafields.custom.material != blank %}
+                    <div class="last-info">
+                        <p class="info-title">Characteristics:</p>
+                        <table>
+                        {% if product.vendor != blank %}
+                            <tr>
+                                <td>Brand</td>
+                                <td>{{ product.vendor }}</td>
+                            </tr>
+                        {% endif %}
+
+                        {% if product.metafields.custom.material != blank %}
+                            <tr>
+                                <td>Material</td>
+                                <td>{{ product.metafields.custom.material }}</td>
+                            </tr>
+                        {% endif %}
+                        </table>
+                    </div>
+                {% endif %}
+
+
+            </div>
+
+        </div>
+    {% endif %}
+
+
+
+</div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        /* ------------------ ELEMENTS ------------------ */
+        const thumbnails   = document.querySelectorAll(".thumbnail");
+        const mainImage    = document.getElementById("mainProductImage");
+        const titleEl      = document.getElementById("productTitle");
+        const decimalPriceEl = document.getElementById("decimalPrice");
+        const normalPriceEl  = document.getElementById("normalPrice");
+        const descEl       = document.getElementById("productDescription");
+        const ratingEl     = document.getElementById("productRating");
+
+        const variantInput = document.getElementById("variantId");
+        const qtyInput     = document.getElementById("quantityInput");
+        const addBtn       = document.getElementById("addToCartBtn");
+        const toast        = document.getElementById("toast");
+        const decimalInput = document.querySelector('.decimal__input');
+
+        /* ------------------ PRODUCT DATA ------------------ */
+        const productsData = {
+            {% for product in section.settings.trending_collection.products %}
+            "{{ product.id }}": {{ product | json }}{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        };
+
+        let activeProduct = productsData[Object.keys(productsData)[0]];
+        let selectedOptions = {};
+
+        /* ------------------ HELPERS ------------------ */
+        const hasVariants = () =>
+            activeProduct?.variants && activeProduct.variants.length > 1;
+
+        const resetQuantity = () => {
+            if (qtyInput) qtyInput.value = 1;
+        };
+
+        const resetVariant = () => {
+            if (variantInput) {
+                variantInput.value = "";
+            }
+        };
+
+        const resetDecimalQuantity = () => {
+            if (!decimalInput) return;
+
+            const min = parseFloat(decimalInput.getAttribute("min")) || 1;
+            decimalInput.value = min;
+        };
+
+        /* ------------------ RATING ------------------ */
+        function renderRating(container, rating) {
+            if (!container) return;
+            container.innerHTML = "";
+
+            const fullStars = Math.floor(rating);
+            const hasHalf   = rating % 1 !== 0;
+
+            for (let i = 0; i < 5; i++) {
+            if (i < fullStars) {
+                container.innerHTML += `<span class="star" style="color:#f59e0b">★</span>`;
+            } else if (i === fullStars && hasHalf) {
+                const percent = (rating % 1) * 100;
+                container.innerHTML += `
+                <span class="star">
+                    <span class="star-fill" style="width:${percent}%">★</span>★
+                </span>`;
+            } else {
+                container.innerHTML += `<span class="star">★</span>`;
+            }
+            }
+            container.innerHTML += `<span class="rating-value">${rating}</span>`;
+        }
+
+        /* ------------------ TOAST ------------------ */
+        function showToast(msg, type = "success") {
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.className = `toast ${type}`;
+            toast.style.display = "block";
+            setTimeout(() => toast.style.display = "none", 3000);
+        }
+
+        /* ------------------ VARIANT UPDATE ------------------ */
+        function updateVariant() {
+                if (!hasVariants()) return;
+
+                const match = activeProduct.variants.find(v => {
+                    return activeProduct.options.every((optionName, index) => {
+                        return selectedOptions[optionName] === v.options[index];
+                    });
+                });
+
+                if (match && variantInput) {
+                    variantInput.value = match.id;
+                }
+        }
+
+        /* ---------------------Render variants ------------------ */
+
+        function renderVariants(product) {
+
+            const wrapper = document.getElementById("variant-wrapper");
+            if (!wrapper) return;
+
+            wrapper.innerHTML = "";
+            selectedOptions = {};
+
+            if (!product.variants || product.variants.length <= 1) return;
+
+            product.options.forEach((optionName, index) => {
+
+                const values = [
+                ...new Set(product.variants.map(v => v.options[index]))
+                ];
+
+                const group = document.createElement("div");
+                group.className = "variant-group";
+
+                const label = document.createElement("p");
+                label.className = "variant-label";
+                label.textContent = optionName;
+
+                const valuesWrap = document.createElement("div");
+                valuesWrap.className = "variant-values";
+
+                values.forEach(value => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "variant-btn";
+                btn.dataset.optionName = optionName;
+                btn.dataset.optionValue = value;
+
+                if (optionName.toLowerCase() === "color") {
+                    btn.classList.add("color-swatch");
+                    btn.style.backgroundColor = value.toLowerCase();
+                } else {
+                    btn.textContent = value;
+                }
+
+                btn.addEventListener("click", () => {
+                    selectedOptions[optionName] = value;
+
+                    valuesWrap
+                    .querySelectorAll(".variant-btn")
+                    .forEach(b => b.classList.remove("active"));
+
+                    btn.classList.add("active");
+                    updateVariant();
+                });
+
+                valuesWrap.appendChild(btn);
+                });
+
+                group.appendChild(label);
+                group.appendChild(valuesWrap);
+                wrapper.appendChild(group);
+            });
+
+            resetVariant();
+        }
+
+        /* ------------------ THUMBNAILS ------------------ */
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener("click", () => {
+
+                thumbnails.forEach(t => t.classList.remove("active"));
+                thumb.classList.add("active");
+
+                animateProductChange(() => {
+                    activeProduct = productsData[thumb.dataset.productId];
+                    selectedOptions = {};
+
+                    //Image
+                    mainImage.src = thumb.dataset.image;
+
+                    //text 
+                    titleEl.textContent = activeProduct.title;
+
+                    //Price 
+                    const isDecimal = thumb.dataset.isDecimal === "true";
+
+                    if (isDecimal) {
+                        // decimal product
+                        decimalPriceEl.style.display = "block";
+                        normalPriceEl.style.display = "none";
+                    } 
+                    else {
+                        // normal product
+                        decimalPriceEl.style.display = "none";
+                        normalPriceEl.style.display = "block";
+                        normalPriceEl.textContent = thumb.dataset.price;
+                    }
+
+                    descEl.textContent = activeProduct.description
+                        ? activeProduct.description.replace(/(<([^>]+)>)/gi, "")
+                        : "";
+
+                    //Rating
+                    renderRating(ratingEl, activeProduct.metafields?.custom?.rating || 0);
+
+                    document.querySelectorAll(".variant-btn")
+                        .forEach(b => b.classList.remove("active"));
+
+                    renderVariants(activeProduct);
+                    resetQuantity(); 
+                    resetDecimalQuantity();  
+                    resetVariant();
+
+                    if (addBtn) {
+                        addBtn.classList.remove("disabled");
+                        addBtn.textContent = "Add to Cart";
+                }
+                });
+
+            });
+        });
+
+        /* ------------------ VARIANT BUTTONS ------------------ */
+        document.querySelectorAll(".variant-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+
+            const name  = btn.dataset.optionName;
+            const value = btn.dataset.optionValue;
+
+            selectedOptions[name] = value;
+
+            document
+                .querySelectorAll(`[data-option-name="${name}"]`)
+                .forEach(b => b.classList.remove("active"));
+
+            btn.classList.add("active");
+            updateVariant();
+            });
+        });
+
+        /* ------------------ QUANTITY ------------------ */
+        document.querySelectorAll(".qty-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+            let qty = parseInt(qtyInput.value) || 1;
+            qtyInput.value =
+                btn.dataset.action === "plus"
+                ? qty + 1
+                : Math.max(1, qty - 1);
+            });
+        });
+
+        /* ------------------ ADD TO CART ------------------ */
+        addBtn?.addEventListener("click", async () => {
+
+            if (hasVariants()) {
+                const requiredOptions = activeProduct.options;
+
+                const allSelected = requiredOptions.every(
+                    option => selectedOptions[option]
+                );
+
+                if (!allSelected) {
+                    showToast("Please select size and color", "error");
+                    return;
+                }
+            }
+
+
+            try {
+
+                const step = parseFloat(decimalInput?.step || 1);
+                const decimalVal = decimalInput ? parseFloat(decimalInput.value) : null;
+
+                addBtn.classList.add("disabled");
+                addBtn.innerHTML = `<i class="ri-shopping-cart-2-line cart"></i> Added To Cart`;
+
+                // 1️⃣ Add to cart
+                const res = await fetch("/cart/add.js", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        id: variantInput.value,
+
+                        // Shopify backend quantity (integer)
+                        quantity: decimalVal
+                            ? Math.round(decimalVal / step)
+                            : parseInt(qtyInput.value, 10),
+
+                        // ✅ CONSTANT property (same every time)
+                        properties: {
+                            "Fabric Info": fabricInfoInput.value
+                        }
+                    })
+                });
+
+                const addedItem = await res.json();
+
+                // 2️⃣ Fetch updated sections
+                const sectionsRes = await fetch(
+                    "/?sections=cart-drawer,cart-icon-bubble,cart-live-region-text"
+                );
+                const sections = await sectionsRes.json();
+
+                const cartDrawer = document.querySelector("cart-drawer");
+
+                if (!cartDrawer) {
+                    window.location.href = "/cart";
+                    return;
+                }
+
+                // 3️⃣ Update drawer
+                cartDrawer.renderContents({
+                    id: addedItem.id,
+                    sections: sections
+                });
+
+                cartDrawer.classList.remove("is-empty");
+                cartDrawer.classList.add("active", "animate");
+
+                addBtn.classList.remove("disabled")
+                addBtn.innerHTML = "Add To Cart"
+
+                showToast("Product added to cart successfully", "success");
+
+            } 
+            catch (error) {
+                console.error(error);
+                showToast("Something went wrong", "error");
+            }
+        });
+
+        /* ------------------ INIT ------------------ */
+        renderRating(ratingEl, ratingEl?.dataset?.rating || 0);
+        resetQuantity();
+        resetDecimalQuantity(); 
+        renderVariants(activeProduct);   
+        resetVariant();
+
+        function animateProductChange(callback) {
+
+            // blur + fade OUT
+            gsap.to(".middle-image img", {
+                opacity: 0,
+                filter: "blur(8px) drop-shadow(0px 0px 10px rgba(0,0,0,0.57))",
+                duration: 0.4,
+                ease: "power2.in",
+                onComplete: () => {
+
+                callback(); 
+
+                mainImage.onload = () => {
+                    gsap.to(".middle-image img", {
+                    opacity: 1,
+                    filter: "blur(0px) drop-shadow(0px 0px 10px rgba(0,0,0,0.57))",
+                    duration: 0.4,
+                    ease: "power2.out"
+                    });
+                };
+                }
+            });
+
+
+            gsap.to("#rightContent", {
+                opacity: 0,
+                filter: "blur(6px)",
+                duration: 0.4,
+                ease: "power2.in",
+                onComplete: () => {
+                gsap.to("#rightContent", {
+                    opacity: 1,
+                    filter: "blur(0px)",
+                    duration: 0.35,
+                    ease: "power2.out"
+                });
+                }
+            });
+        }
+
+    });
+    
+</script>
+
+{% schema %}
+    {
+        "name": "Custom Trending Product",
+        "settings": [
+
+            {
+                "type": "collection",
+                "id": "trending_collection",
+                "label": "Select Trending Collection"
+            },
+            {
+                "type": "range",
+                "id": "products_limit",
+                "label": "Number of products",
+                "min": 4,
+                "max": 12,
+                "step": 1,
+                "default": 8
+            }
+                    
+
+        ],
+
+        "presets": [
+            {
+            "name": "Custom Trending Product"
+            }
+        ]
+    }
+{% endschema %}

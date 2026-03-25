@@ -1,0 +1,243 @@
+{% comment %}
+  Renders a list of product's price (regular, sale)
+
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - placeholder: {Boolean} Renders a placeholder price (optional)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+  - price_class: {String} Adds a price class to the price element (optional)
+  - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
+
+  Usage:
+  {% render 'price', product: product %}
+
+{% endcomment %}
+
+{% comment %} Product decimal main logic file of making the fractional quantity functionality getting data from metafileds and also adding the qunatity section for Site UI {% endcomment %}
+
+{% comment %} adding this to Product template / grid for making decimal quantity functionality in UI {% endcomment %}
+
+{% comment %} core logic for decimal quantity selector{% endcomment %}
+
+{% comment %} default values for quantity {% endcomment %}
+
+{% assign DEBUG = false %} 
+{% assign decimal = false %} 
+{% assign step = 1 %}
+{% assign minimum_qty = 1 %}
+{% assign product = product | default: card_product %}
+
+{% comment %} raw product price that will chnage based on decimal logic {% endcomment %}
+
+{% comment %} Display: disp {% endcomment %}
+{% assign disp_price_min = product.price_min %}  {% comment %}Product normal minimum price {% endcomment %}
+
+{% assign disp_price_compare = product.compare_at_price %} {% comment %}Product Compare at Price{% endcomment %}
+{% assign disp_price = product.price %} {% comment %}Product Overall price{% endcomment %}
+
+{% comment %}
+  If custom decimal is part is selected assigning the values and making code functional for further process 
+{% endcomment %}
+
+{% if settings.pr_enable_decimal %}
+
+	{% assign pri_unit = settings.pr_unit %}  {% comment %}primary unit of price such as meter, kg,  yards, etc...{% endcomment %}
+
+    {% comment %}Sab decimal products ke rules same honge {% endcomment %}
+
+  	{% if settings.pr_common_decimal %}
+
+        {% comment %}
+          If product has tag decimal than the custom decimal part is shown
+        {% endcomment %}
+		
+		{% if product.tags contains 'decimal' %}
+
+            {% comment %} Decimal activate + settings apply {% endcomment %}
+
+			{% assign decimal = true %}  
+		  	{% assign step = settings.pr_decimal_step_size %}
+          	{% assign minimum_qty = settings.pr_minimum_qty %}
+
+		{% endif%}
+    
+        {% comment %}
+          If using metafields use this
+        {% endcomment %}
+
+  	{% elsif product.metafields.propero['decimal_step_size'] != blank %}  
+		
+		{% assign step = product.metafields.propero['decimal_step_size'] %}
+		{% assign decimal = true %}
+
+  	{% endif %}
+
+    {% comment %} Checkout text preparation {% endcomment %}
+
+	{% assign checkout_text = settings.pr_checkout_text |replace :"%UNIT%", pri_unit %}
+
+	{% assign qty_multiple = 1 | divided_by : step %}
+
+	{% assign checkout_text = checkout_text | replace :"%QUANTITY%", qty_multiple   %}	
+
+{% endif %}
+
+{% comment %} Har product ke alag rules ho non-common rules setting values based on per product decimal values assigned in product metafields {% endcomment %}
+
+{% unless settings.pr_common_decimal %}
+
+    {% if product.metafields.propero['minimum_qty'] != blank %}
+
+        {% assign minimum_qty = product.metafields.propero['minimum_qty'] %}	
+
+    {% endif %}
+
+{% endunless %}
+
+{% comment %} setting price based on decimal for product, collection, search {% endcomment %}
+
+{% if template.name == 'product' or template.name == 'collection' or template.name == 'search' or template.name == 'index'%}
+
+    {% assign disp_price = product.price | divided_by : step %}
+    {% assign disp_price_min = product.price_min | divided_by : step %}
+    {% assign disp_price_compare = product.compare_at_price | divided_by : step %}
+
+{% endif %}
+
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  elsif placeholder
+    assign target = null
+  else
+    assign target = product
+  endif
+
+  if decimal
+    assign compare_at_price = disp_price_compare
+    assign price = disp_price
+  else
+    assign compare_at_price = target.compare_at_price
+    assign price = target.price | default: 1999
+  endif
+
+  assign price_min = product.price_min
+  assign price_max = product.price_max
+  assign available = target.available | default: false
+  assign money_price = price | money
+  assign money_price_min = price_min | money
+  assign money_price_max = price_max | money
+
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_price_min = price_min | money_with_currency
+    assign money_price_max = price_max | money_with_currency
+  endif
+
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+-%}
+
+{%- unless target == null and placeholder == null -%}
+  <div
+    class="
+      price
+      {%- if price_class %} {{ price_class }}{% endif -%}
+      {%- if available == false %} price--sold-out{% endif -%}
+      {%- if compare_at_price > price and product.quantity_price_breaks_configured? != true %} price--on-sale{% endif -%}
+      {%- if compare_at_price > price and product.quantity_price_breaks_configured? %} volume-pricing--sale-badge{% endif -%}
+      {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+      {%- if show_badges %} price--show-badge{% endif -%}
+    "
+  >
+    <div class="price__container">
+
+      {%- comment -%}
+        Explanation of description list:
+          - div.price__regular: Displayed when there are no variants on sale
+          - div.price__sale: Displayed when a variant is a sale
+      {%- endcomment -%}
+
+      <div class="price__regular">
+        {%- if product.quantity_price_breaks_configured? -%}
+          {%- if show_compare_at_price and compare_at_price -%}
+            {%- unless product.price_varies == false and product.compare_at_price_varies %}
+              <span class="visually-hidden visually-hidden--inline">
+                {{- 'products.product.price.regular_price' | t -}}
+              </span>
+              <span>
+                <s class="price-item price-item--regular variant-item__old-price">
+                  {% if settings.currency_code_enabled %}
+                    {{ compare_at_price | money_with_currency }}
+                  {% else %}
+                    {{ compare_at_price | money }}
+                  {% endif %}
+                </s>
+              </span>
+            {%- endunless -%}
+          {%- endif -%}
+          <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+          <span class="price-item price-item--regular">
+            {{-
+              'products.product.volume_pricing.price_range'
+              | t: minimum: money_price_min, maximum: money_price_max
+            -}}
+          </span>
+        {%- else -%}
+          <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+          <span class="price-item price-item--regular" >
+
+            {% if decimal %}
+              {{ money_price }}
+            {% else %}
+              {{ money_price }}
+            {% endif %}
+
+          </span>
+        {%- endif -%}
+      </div>
+      <div class="price__sale">
+        {%- unless product.price_varies == false and product.compare_at_price_varies %}
+          <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+          <span>
+            <s class="price-item price-item--regular">
+              {% if settings.currency_code_enabled %}
+                {{ compare_at_price | money_with_currency }}
+              {% else %}
+                {{ compare_at_price | money }}
+              {% endif %}
+            </s>
+          </span>
+        {%- endunless -%}
+        <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+        <span class="price-item price-item--sale price-item--last">
+          {{ money_price }}
+        </span>
+      </div>
+      {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
+        {% render 'unit-price', price: product.selected_or_first_available_variant.unit_price, measurement: product.selected_or_first_available_variant.unit_price_measurement %}
+      {%- endif -%}
+    </div>
+
+    {% comment %} show per unit price {% endcomment %}
+
+    {% if decimal %}
+        <div class="per-unit-price">
+          per {{ pri_unit }}
+        </div>
+    {% endif %}
+
+    {%- if show_badges -%}
+
+      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+        {{ 'products.product.on_sale' | t }}
+      </span>
+
+      <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {%- endif -%}
+  </div>
+{% endunless %}

@@ -1,0 +1,134 @@
+.mega-menu {
+  position: static;
+}
+
+
+
+.mega-menu__content {
+  background-color: #F7F2EB;
+  border-left: 0;
+  border-radius: 0;
+  border-right: 0;
+  left: 0;
+  overflow-y: auto;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 0;
+  top: 100%;
+  height: auto;
+
+}
+
+.shopify-section-header-sticky .mega-menu__content {
+  max-height: calc(100vh - var(--header-bottom-position-desktop, 20rem) - 4rem);
+}
+
+.header-wrapper--border-bottom .mega-menu__content {
+  border-top: 0;
+}
+
+.js .mega-menu__content {
+  opacity: 0;
+  transform: translateY(-1.5rem);
+}
+
+.mega-menu[open] .mega-menu__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mega-menu__list {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 20px 60px;
+  list-style: none;
+  margin-left: 10px;
+  width: auto;
+}
+
+.mega-menu__link {
+  color: black;
+  opacity: 0.9;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: calc(1 + 0.3 / var(--font-body-scale));
+  padding-bottom: 0.6rem;
+  padding-top: 0.6rem;
+  text-decoration: none;
+  transition: all 0.6s ease-in-out;
+  word-wrap: break-word;
+}
+
+.sub-menu {
+  font-size: 14px;
+  line-height: 0.6;
+  padding-bottom: 0rem;
+}
+
+.mega-menu__link--level-2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  width: 0;
+  height: 1.6px;
+  background: #54267E;
+  transition: width 0.6s ease-in-out;
+}
+
+.mega-menu__link--level-2:hover::after {
+  width: 100%;
+}
+
+
+.mega-menu__link--level-2 {
+  font-weight: bold;
+  position: relative;
+}
+
+.header--top-center .mega-menu__list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 0;
+}
+
+.header--top-center .mega-menu__list > li {
+  width: 16%;
+  padding-right: 2.4rem;
+}
+
+
+
+.mega-menu__link:hover,
+.mega-menu__link--active{
+  color: #54267E;
+  font-weight: 700;
+}
+
+.mega-menu-wrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 20px;
+}
+
+.mega-menu-image {
+  width: 500px;
+  height: 400px;
+}
+
+mega-menu-image--multiple {
+  display: flex;
+  width: auto;
+  height: auto;
+}
+
+.mega-menu-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}

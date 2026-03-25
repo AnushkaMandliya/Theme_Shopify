@@ -1,0 +1,154 @@
+{{ 'custom-video.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-video-wrapper page-width">
+
+  <h2 class="video-heading">Crafted for Timeless Style</h2>
+
+  <div class="video-banner-wrapper swiper video-swiper" >
+
+    <div class="swiper-wrapper">
+
+        {% for block in section.blocks %}
+
+            {% if block.type == "slide" %}
+
+                <div class="video-slide swiper-slide"> 
+
+                    {% if block.settings.product_video != blank %} 
+                        {{ block.settings.product_video | video_tag: 
+                            loop: true, 
+                            muted: true, 
+                            playsinline: true,
+                            preload: 'auto',
+                            class: 'banner-video desktop-video' 
+                        }} 
+                    {% endif %} 
+                </div>
+                        
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+    <div class="swiper-pagination"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+  (function () {
+
+    let bannerSwiper = null;
+    let scrollTriggerInstance = null;
+
+    function initVideoSwiperSection() {
+      const wrapper = document.querySelector(".video-banner-wrapper");
+      if (!wrapper) return;
+
+      if (bannerSwiper) {
+        bannerSwiper.destroy(true, true);
+        bannerSwiper = null;
+      }
+
+      function preloadVideos() {
+        wrapper.querySelectorAll(".banner-video").forEach(video => {
+          video.load(); 
+        });
+      }
+
+      bannerSwiper = new Swiper(wrapper, {
+        spaceBetween: 30,
+        slidesPerView: 1.2,
+        pagination: {
+          el: wrapper.querySelector(".swiper-pagination"),
+          dynamicBullets: true,
+          clickable: true,
+        },
+        autoplay: false,
+        breakpoints: {
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 4 }
+        }
+      });
+
+      preloadVideos();
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (scrollTriggerInstance) scrollTriggerInstance.kill();
+
+      scrollTriggerInstance = ScrollTrigger.create({
+
+        trigger: wrapper,
+        start: "top 70%",
+        end: "bottom 20%",
+        onEnter: () => {
+          bannerSwiper.autoplay.start();
+          playVideos();
+        },
+        onEnterBack: () => {
+          bannerSwiper.autoplay.start();
+          playVideos();
+        },
+        onLeave: () => {
+          bannerSwiper.autoplay.stop();
+          pauseVideos();
+        },
+        onLeaveBack: () => {
+          bannerSwiper.autoplay.stop();
+          pauseVideos();
+        }
+
+      });
+
+      function playVideos() {
+        wrapper.querySelectorAll(".banner-video").forEach(video => {
+          video.play().catch(() => {});
+        });
+      }
+
+      function pauseVideos() {
+        wrapper.querySelectorAll(".banner-video").forEach(video => {
+          video.pause();
+        });
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", initVideoSwiperSection);
+    document.addEventListener("shopify:section:load", initVideoSwiperSection);
+
+  })();
+
+</script>
+
+{% schema %}
+    {
+        "name": "Custom Video Section",
+        "settings": [
+
+        ],
+
+        "blocks": [
+            {
+                "type": "slide",
+                "name": "Video Slide",
+                "settings": [
+                    {
+                        "type": "video",
+                        "id": "product_video",
+                        "label": "Product Video"
+                    }
+
+                ]
+            }
+        ],
+
+        "presets": [
+            {
+            "name": "Custom Video Section"
+            }
+        ]
+    }
+{% endschema %}
